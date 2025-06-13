@@ -6,13 +6,16 @@ import { authorize } from './api'
 import { router } from './router'
 import OpenTelegram from './components/OpenTelegram.vue'
 
-const isTelegram = typeof window !== 'undefined' && !!(window as any).Telegram?.WebApp
+function initApp() {
+  const isTelegram = !!(window as any).Telegram?.WebApp
 
-if (isTelegram) {
-  setupTelegram()
-  authorize().catch(console.error)
-  router.push('/tests').then(r => r)
-  createApp(App).use(router).mount('#app')
-} else {
-  createApp(OpenTelegram).mount('#app')
+  if (isTelegram) {
+    setupTelegram()
+    authorize().catch(console.error)
+    createApp(App).use(router).mount('#app')
+  } else {
+    createApp(OpenTelegram).mount('#app')
+  }
 }
+
+setTimeout(initApp, 100)
