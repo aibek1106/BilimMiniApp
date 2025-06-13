@@ -8,11 +8,11 @@
   --border-color: #dee2e6;
 }
 [data-theme='dark'] {
-  --text-color: #f8f9fa;
-  --background-color: #212529;
-  --card-bg: #343a40;
-  --nav-bg: #212529;
-  --border-color: #495057;
+  --text-color: #e9ecef;
+  --background-color: #121212;
+  --card-bg: #1e1e1e;
+  --nav-bg: #121212;
+  --border-color: #343a40;
 }
 body {
   margin: 0;

@@ -58,7 +58,7 @@ function select(idx: number) {
 button {
   padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   background: var(--card-bg);
 }
 </style>

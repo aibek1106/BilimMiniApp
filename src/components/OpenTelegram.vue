@@ -25,12 +25,12 @@ const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${e
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f7f8fa;
+  background: var(--background-color);
   padding: 1rem;
 }
 
 .card {
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -45,14 +45,14 @@ h1 {
 }
 
 p {
-  color: #444;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
 }
 
 .tg-link {
   display: inline-block;
   padding: 0.75rem 1.25rem;
-  background-color: #0088cc;
+  background-color: var(--accent-color);
   color: white;
   border-radius: 8px;
   text-decoration: none;

@@ -41,7 +41,7 @@ button {
   font-size: 1rem;
   padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
 }
 button {
   background: var(--accent-color);
