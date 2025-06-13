@@ -6,7 +6,10 @@ import { authorize } from './api'
 import { router } from './router'
 import OpenTelegram from './components/OpenTelegram.vue'
 
-const isTelegram = typeof window !== 'undefined' && !!(window as any).Telegram?.WebApp
+const isTelegram =
+  typeof window !== 'undefined' &&
+  !!(window as any).Telegram?.WebApp &&
+  (window as any).Telegram.WebApp.platform !== 'unknown'
 
 if (isTelegram) {
   setupTelegram()
