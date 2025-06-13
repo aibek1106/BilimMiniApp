@@ -5,7 +5,7 @@ let token: string | null = localStorage.getItem('jwt')
 export async function authorize(force = false): Promise<string | null> {
   if (token && !force) return token
   const initData = getInitData()
-  const res = await fetch('/mobile/api/auth?initData=' + encodeURIComponent(initData), {
+  const res = await fetch('/api/mobile/auth?initData=' + encodeURIComponent(initData), {
     method: 'POST'
   })
   if (!res.ok) {
