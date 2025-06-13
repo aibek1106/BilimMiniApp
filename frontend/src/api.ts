@@ -1,8 +1,8 @@
 import { getInitData } from './telegram'
 
-let token = localStorage.getItem('jwt')
+let token: string | null = localStorage.getItem('jwt')
 
-export async function authorize(force = false) {
+export async function authorize(force = false): Promise<string> {
   if (token && !force) return token
   const initData = getInitData()
   const res = await fetch('/api/auth?initData=' + encodeURIComponent(initData), {
@@ -17,7 +17,11 @@ export async function authorize(force = false) {
   return token
 }
 
-export async function apiFetch(input, options = {}, retry = true) {
+export async function apiFetch(
+  input: RequestInfo | URL,
+  options: RequestInit = {},
+  retry = true
+): Promise<Response> {
   if (!token) {
     await authorize()
   }
