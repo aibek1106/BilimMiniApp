@@ -41,5 +41,6 @@ watch(
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 8px;
+  color: var(--text-color);
 }
 </style>
