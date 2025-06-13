@@ -1,5 +1,5 @@
 <template>
-  <div :data-theme="theme" class="app">
+  <div class="app">
     <router-view />
     <BottomNav />
     <button class="theme-toggle" @click="toggleTheme">{{ themeLabel }}</button>
@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import BottomNav from './components/BottomNav.vue'
 
 const theme = ref(localStorage.getItem('theme') || 'light')
@@ -17,6 +17,14 @@ function toggleTheme() {
   theme.value = theme.value === 'dark' ? 'light' : 'dark'
   localStorage.setItem('theme', theme.value)
 }
+
+watch(
+  theme,
+  newTheme => {
+    document.documentElement.setAttribute('data-theme', newTheme)
+  },
+  { immediate: true }
+)
 </script>
 
 <style scoped>
