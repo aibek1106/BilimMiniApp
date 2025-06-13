@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-const telegramLink = 'https://t.me/your_channel';
+const telegramLink = 'https://t.me/test_ort_bot/app';
 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(telegramLink)}`;
 </script>
 
