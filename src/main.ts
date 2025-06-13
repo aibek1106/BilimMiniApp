@@ -4,8 +4,14 @@ import './style.css'
 import { setupTelegram } from './telegram'
 import { authorize } from './api'
 import { router } from './router'
+import OpenTelegram from './components/OpenTelegram.vue'
 
-setupTelegram()
-authorize().catch(console.error)
+const isTelegram = typeof window !== 'undefined' && !!(window as any).Telegram?.WebApp
 
-createApp(App).use(router).mount('#app')
+if (isTelegram) {
+  setupTelegram()
+  authorize().catch(console.error)
+  createApp(App).use(router).mount('#app')
+} else {
+  createApp(OpenTelegram).mount('#app')
+}
