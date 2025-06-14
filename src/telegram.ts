@@ -3,10 +3,20 @@ export function setupTelegram(): void {
   if (!tg) return
   tg.ready()
   tg.expand()
-  // Use dark header and hide the default main button for a clean look
+  // Set header color based on stored theme and hide the default main button
   try {
-    tg.setHeaderColor('#000000')
+    const theme = localStorage.getItem('theme') || 'light'
+    const headerColor = theme === 'dark' ? '#121212' : '#ffffff'
+    tg.setHeaderColor(headerColor)
     tg.MainButton.hide()
+  } catch (e) {
+    console.error('Telegram WebApp API error', e)
+  }
+}
+
+export function setHeaderColor(color: string): void {
+  try {
+    ;(window as any)?.Telegram?.WebApp?.setHeaderColor(color)
   } catch (e) {
     console.error('Telegram WebApp API error', e)
   }
