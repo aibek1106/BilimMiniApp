@@ -50,12 +50,23 @@ watch(
   position: relative;
   height: 100%;
   box-sizing: border-box;
+  padding-bottom: calc(
+    4.5rem + var(--tg-content-safe-area-inset-bottom, var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom)))
+  );
+  padding-top: var(
+    --tg-content-safe-area-inset-top,
+    var(--tg-safe-area-inset-top, env(safe-area-inset-top))
+  );
   padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
   padding-top: env(safe-area-inset-top);
   overflow-y: auto;
 }
 .theme-toggle {
   position: fixed;
+  top: calc(
+    var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, env(safe-area-inset-top))) +
+      0.5rem
+  );
   top: calc(env(safe-area-inset-top) + 0.5rem);
   right: 0.5rem;
   background: var(--card-bg);
@@ -66,6 +77,10 @@ watch(
 }
 .close-btn {
   position: fixed;
+  top: calc(
+    var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, env(safe-area-inset-top))) +
+      0.5rem
+  );
   top: calc(env(safe-area-inset-top) + 0.5rem);
   left: 0.5rem;
   background: var(--card-bg);
