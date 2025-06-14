@@ -24,12 +24,22 @@ body {
   margin: 0;
   font-family: var(--font-family);
   color: var(--text-color);
+  line-height: 1.6;
   background: var(--background-color);
   overflow: hidden;
   min-height: 100vh;
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+}
+.page h1,
+.page h2,
+.page h3 {
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+.page p {
+  margin: 0.5rem 0;
 }
 .page {
   padding-bottom: calc(
@@ -42,4 +52,18 @@ button {
 }
 .bottom-nav .item {
   -webkit-tap-highlight-color: transparent;
+}
+select,
+input,
+button {
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+button {
+  background: var(--accent-color);
+  color: #fff;
 }
