@@ -47,6 +47,7 @@ const schoolId = ref<number | null>(null)
 onMounted(async () => {
   try {
     regions.value = await fetchRegions()
+    console.log('loaded regions', regions.value)
   } catch (e) {
     console.error(e)
   }
@@ -60,6 +61,7 @@ watch(regionId, async id => {
   schools.value = []
   try {
     cities.value = await fetchCities(id)
+    console.log('loaded cities', cities.value)
   } catch (e) {
     console.error(e)
   }
@@ -71,6 +73,7 @@ watch(cityId, async id => {
   schools.value = []
   try {
     schools.value = await fetchSchools(id)
+    console.log('loaded schools', schools.value)
   } catch (e) {
     console.error(e)
   }
@@ -79,7 +82,9 @@ watch(cityId, async id => {
 async function proceed() {
   if (!schoolId.value) return
   try {
+    console.log('proceed: registering user')
     await registerUser({ schoolId: schoolId.value, language: language.value })
+    console.log('proceed: registration complete')
     localStorage.setItem('language', language.value)
     localStorage.setItem('registered', '1')
     router.push('/tests')
