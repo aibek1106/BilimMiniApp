@@ -1,17 +1,30 @@
 <template>
   <div class="page">
-    <p>Имя: {{ name }}</p>
-    <p>Язык: {{ language }}</p>
+    <div class="profile-info">
+      <p>Имя: {{ name }}</p>
+      <p>Язык: {{ language }}</p>
+      <p>Пройдено тестов: {{ testsDone }}</p>
+      <p>Тариф: {{ plan }}</p>
+      <p>Школа: {{ school }}</p>
+    </div>
+    <button @click="editProfile">Редактировать профиль</button>
+    <button @click="openSettings">Настройки</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { apiFetch } from '../api'
 import { getTelegramUser } from '../telegram'
 
+const router = useRouter()
+
 const name = ref('')
 const language = ref('')
+const testsDone = ref(0)
+const plan = ref('Бесплатный')
+const school = ref(localStorage.getItem('school') || 'Школа №1')
 
 onMounted(async () => {
   const user = getTelegramUser()
@@ -39,10 +52,27 @@ onMounted(async () => {
     console.error(e)
   }
 })
+
+function editProfile() {
+  alert('Редактирование профиля пока недоступно')
+}
+
+function openSettings() {
+  router.push('/profile/settings')
+}
 </script>
 
 <style scoped>
 .page {
   padding: 1rem;
+}
+.profile-info {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+button {
+  margin-bottom: 0.5rem;
 }
 </style>

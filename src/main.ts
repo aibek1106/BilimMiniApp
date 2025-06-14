@@ -50,8 +50,10 @@ async function init() {
         }
       })
       .then(() => {
-        router.push('/tests').then(r => r)
-        createApp(App).use(router).mount('#app')
+        const app = createApp(App)
+        app.use(router)
+        router.replace('/tests')
+        app.mount('#app')
       })
       .catch(e => {
         console.error(e)

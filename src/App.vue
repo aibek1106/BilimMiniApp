@@ -2,35 +2,14 @@
   <div class="app">
     <router-view />
     <BottomNav />
-    <button
-      class="theme-toggle"
-      @click="toggleTheme"
-      :aria-label="themeLabel"
-    >
-      {{ themeIcon }}
-    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { watch } from 'vue'
 import BottomNav from './components/BottomNav.vue'
-import { close, setHeaderColor } from './telegram'
-
-const theme = ref(localStorage.getItem('theme') || 'light')
-const themeLabel = computed(() =>
-  theme.value === 'dark' ? 'Светлая тема' : 'Тёмная тема'
-)
-const themeIcon = computed(() => (theme.value === 'dark' ? '🌞' : '🌙'))
-
-function toggleTheme() {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark'
-  localStorage.setItem('theme', theme.value)
-}
-
-function closeApp() {
-  close()
-}
+import { setHeaderColor } from './telegram'
+import { theme } from './theme'
 
 watch(
   theme,
@@ -58,19 +37,6 @@ watch(
     var(--tg-safe-area-inset-top, env(safe-area-inset-top))
   );
   overflow-y: auto;
-}
-.theme-toggle {
-  position: fixed;
-  top: calc(
-    var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, env(safe-area-inset-top))) +
-      3rem
-  );
-  right: 0.5rem;
-  background: var(--card-bg);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  color: var(--text-color);
 }
 .close-btn {
   position: fixed;
