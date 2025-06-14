@@ -2,7 +2,13 @@
   <div class="app">
     <router-view />
     <BottomNav />
-    <button class="theme-toggle" @click="toggleTheme">{{ themeLabel }}</button>
+    <button
+      class="theme-toggle"
+      @click="toggleTheme"
+      :aria-label="themeLabel"
+    >
+      {{ themeIcon }}
+    </button>
   </div>
 </template>
 
@@ -12,7 +18,10 @@ import BottomNav from './components/BottomNav.vue'
 import { close } from './telegram'
 
 const theme = ref(localStorage.getItem('theme') || 'light')
-const themeLabel = computed(() => (theme.value === 'dark' ? 'Светлая тема' : 'Тёмная тема'))
+const themeLabel = computed(() =>
+  theme.value === 'dark' ? 'Светлая тема' : 'Тёмная тема'
+)
+const themeIcon = computed(() => (theme.value === 'dark' ? '🌞' : '🌙'))
 
 function toggleTheme() {
   theme.value = theme.value === 'dark' ? 'light' : 'dark'
