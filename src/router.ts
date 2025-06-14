@@ -22,7 +22,7 @@ export const router = createRouter({
 })
 
 router.beforeEach((to, _from, next) => {
-  const registered = !!localStorage.getItem('userName')
+  const registered = localStorage.getItem('registered') === '1'
   if (!registered && to.path !== '/register') {
     next('/register')
   } else {

@@ -8,12 +8,25 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { apiFetch } from '../api'
+import { getTelegramUser } from '../telegram'
+
 const name = ref('')
 const language = ref('')
 
-onMounted(() => {
-  name.value = localStorage.getItem('userName') || ''
-  language.value = localStorage.getItem('language') || ''
+onMounted(async () => {
+  const user = getTelegramUser()
+  if (!user) return
+  try {
+    const res = await apiFetch(`/api/mobile/users/${user.id}`)
+    if (res.ok) {
+      const data = await res.json()
+      name.value = `${data.firstName} ${data.lastName}`
+      language.value = data.language
+    }
+  } catch (e) {
+    console.error(e)
+  }
 })
 </script>
 

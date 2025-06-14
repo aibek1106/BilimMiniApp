@@ -1,4 +1,4 @@
-import { getInitData } from './telegram'
+import { getInitData, getTelegramUser } from './telegram'
 
 let token: string | null = localStorage.getItem('jwt')
 
@@ -35,4 +35,55 @@ export async function apiFetch(
     return apiFetch(input, options, false)
   }
   return res
+}
+
+export async function fetchRegions() {
+  const res = await apiFetch('/api/mobile/location/regions')
+  if (!res.ok) throw new Error('Failed to load regions')
+  return res.json()
+}
+
+export async function fetchCities(regionId: number) {
+  const res = await apiFetch(`/api/mobile/location/cities/${regionId}`)
+  if (!res.ok) throw new Error('Failed to load cities')
+  return res.json()
+}
+
+export async function fetchSchools(cityId: number) {
+  const res = await apiFetch(`/api/mobile/location/schools/${cityId}`)
+  if (!res.ok) throw new Error('Failed to load schools')
+  return res.json()
+}
+
+export interface RegisterPayload {
+  telegramId: number
+  firstName?: string
+  lastName?: string
+  schoolId: number
+  language: string
+}
+
+export async function registerUser(payload: Omit<RegisterPayload, 'telegramId' | 'firstName' | 'lastName'>) {
+  const user = getTelegramUser()
+  if (!user) throw new Error('No telegram user')
+  const body: RegisterPayload = {
+    telegramId: user.id,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    ...payload
+  }
+  const res = await apiFetch('/api/mobile/users/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  })
+  if (!res.ok) throw new Error('Registration failed')
+  return res.json()
+}
+
+export async function userExists(telegramId: number) {
+  const res = await apiFetch(`/api/mobile/users/${telegramId}/exists`)
+  if (!res.ok) throw new Error('User exists check failed')
+  const data = await res.json()
+  return data.exists
 }
