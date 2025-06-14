@@ -3,7 +3,6 @@
     <router-view />
     <BottomNav />
     <button class="theme-toggle" @click="toggleTheme">{{ themeLabel }}</button>
-    <button class="close-btn" @click="closeApp">✖</button>
   </div>
 </template>
 
