@@ -3,6 +3,13 @@ export function setupTelegram(): void {
   if (!tg) return
   tg.ready()
   tg.expand()
+  // Use dark header and hide the default main button for a clean look
+  try {
+    tg.setHeaderColor('dark')
+    tg.MainButton.hide()
+  } catch (e) {
+    console.error('Telegram WebApp API error', e)
+  }
 }
 
 export function getInitData(): string {
