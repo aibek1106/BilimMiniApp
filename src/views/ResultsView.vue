@@ -1,12 +1,10 @@
 <template>
   <div class="page">
-    <img
-      src="https://media.giphy.com/media/3o6UBpHgaXFDNAuttm/giphy.gif"
-      alt="sticker"
-      class="sticker"
-    />
-    <p>Ваш результат: {{ score }}</p>
-    <button @click="share">Отправить результат</button>
+    <div class="result-card">
+      <h2>Ваш результат</h2>
+      <p class="score">{{ score }}%</p>
+      <button @click="share">Отправить результат</button>
+    </div>
   </div>
 </template>
 
@@ -40,9 +38,18 @@ function share() {
 .page {
   padding: 1rem;
 }
-.sticker {
-  width: 150px;
-  display: block;
-  margin: 0 auto 1rem;
+.result-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+}
+.score {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
 }
 </style>
