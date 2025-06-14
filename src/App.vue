@@ -51,7 +51,7 @@ watch(
   height: 100%;
   box-sizing: border-box;
   padding-bottom: calc(
-    4.5rem + var(--tg-content-safe-area-inset-bottom, var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom)))
+    5rem + var(--tg-content-safe-area-inset-bottom, var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom)))
   );
   padding-top: var(
     --tg-content-safe-area-inset-top,

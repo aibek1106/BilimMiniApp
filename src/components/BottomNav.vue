@@ -47,7 +47,7 @@ function navigate(path: string) {
   position: fixed;
   bottom: calc(
     var(--tg-content-safe-area-inset-bottom, var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom))) +
-      0.5rem
+      1rem
   );
   left: 50%;
   transform: translateX(-50%);
