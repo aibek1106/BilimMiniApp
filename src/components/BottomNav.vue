@@ -45,14 +45,20 @@ function navigate(path: string) {
 <style scoped>
 .bottom-nav {
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+  bottom: calc(
+    var(--tg-content-safe-area-inset-bottom, var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom))) +
+      0.5rem
+  );
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   justify-content: space-around;
   width: calc(100% - 2rem);
   max-width: 500px;
-  padding: 0.5rem 0.25rem calc(0.5rem + env(safe-area-inset-bottom)) 0.25rem;
+  padding: 0.5rem 0.25rem
+    calc(
+      0.5rem + var(--tg-content-safe-area-inset-bottom, var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom)))
+    ) 0.25rem;
   background: var(--nav-bg-translucent);
   backdrop-filter: blur(16px);
   border-radius: 16px;
