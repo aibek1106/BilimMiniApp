@@ -28,18 +28,18 @@ export async function apiFetch(
   options: RequestInit = {},
   retry = true
 ): Promise<Response> {
-  /*if (!token) {
+  if (!token) {
     await authorize()
-  }*/
+  }
   const headers = new Headers(options.headers || {})
   headers.set('Authorization', `Bearer ${token}`)
   console.log('apiFetch:', input)
   const res = await fetch(input, { ...options, headers })
   console.log('apiFetch: response status', res.status)
-  /*if (res.status === 401 && retry) {
+  if (res.status === 401 && retry) {
     await authorize(true)
     return apiFetch(input, options, false)
-  }*/
+  }
   return res
 }
 
