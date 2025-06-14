@@ -5,7 +5,6 @@ export function setupTelegram(): void {
   tg.expand()
   // Use dark header and hide the default main button for a clean look
   try {
-    tg.setHeaderColor('#000000')
     tg.MainButton.hide()
   } catch (e) {
     console.error('Telegram WebApp API error', e)
