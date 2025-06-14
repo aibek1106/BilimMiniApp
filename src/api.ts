@@ -3,7 +3,6 @@ import { getInitData, getTelegramUser } from './telegram'
 let token: string | null = localStorage.getItem('jwt')
 
 export async function authorize(force = false): Promise<string | null> {
-  if (token && !force) return token
   const initData = getInitData()
   console.log('authorize: initData', initData)
   const res = await fetch('/api/mobile/auth?initData=' + encodeURIComponent(initData), {
