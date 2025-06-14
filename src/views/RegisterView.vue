@@ -97,6 +97,11 @@ async function proceed() {
     console.log('proceed: registering user')
     await registerUser({ schoolId: schoolId.value, language: language.value })
     console.log('proceed: registration complete')
+    const selected = schools.value.find(s => s.id === schoolId.value)
+    if (selected) {
+      const name = language.value === 'KY' ? selected.nameKy : selected.nameRu
+      localStorage.setItem('school', name)
+    }
     localStorage.setItem('language', language.value)
     localStorage.setItem('registered', '1')
     sendData('registered')
