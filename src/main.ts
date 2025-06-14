@@ -16,22 +16,23 @@ console.log('isTelegram', isTelegram)
 if (isTelegram) {
   setupTelegram()
   console.log('initData', getInitData())
-  authorize()
+  /*authorize()
     .then(async () => {
-      const user = getTelegramUser()
-      console.log('telegram user', user)
-      if (user) {
-        try {
-          const exists = await userExists(user.id)
-          if (exists) {
-            localStorage.setItem('registered', '1')
-          }
-        } catch (e) {
-          console.error(e)
-        }
-      }
+
     })
-    .catch(console.error)
+    .catch(console.error)*/
+  const user = getTelegramUser()
+  console.log('telegram user', user)
+  if (user) {
+    try {
+      const exists = await userExists(user.id)
+      if (exists) {
+        localStorage.setItem('registered', '1')
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
   router.push('/tests').then(r => r)
   createApp(App).use(router).mount('#app')
 } else {
