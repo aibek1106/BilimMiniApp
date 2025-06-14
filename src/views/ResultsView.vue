@@ -2,6 +2,7 @@
   <div class="page">
     <h1>Результаты</h1>
     <p>Ваш результат: {{ score }}</p>
+    <button @click="share">Отправить результат</button>
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { apiFetch } from '../api'
+import { sendData } from '../telegram'
 
 const score = ref(0)
 const route = useRoute()
@@ -24,6 +26,10 @@ onMounted(async () => {
     console.error(e)
   }
 })
+
+function share() {
+  sendData(`score:${score.value}`)
+}
 </script>
 
 <style scoped>

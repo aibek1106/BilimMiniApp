@@ -3,12 +3,14 @@
     <router-view />
     <BottomNav />
     <button class="theme-toggle" @click="toggleTheme">{{ themeLabel }}</button>
+    <button class="close-btn" @click="closeApp">✖</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import BottomNav from './components/BottomNav.vue'
+import { close } from './telegram'
 
 const theme = ref(localStorage.getItem('theme') || 'light')
 const themeLabel = computed(() => (theme.value === 'dark' ? 'Светлая тема' : 'Тёмная тема'))
@@ -16,6 +18,10 @@ const themeLabel = computed(() => (theme.value === 'dark' ? 'Светлая те
 function toggleTheme() {
   theme.value = theme.value === 'dark' ? 'light' : 'dark'
   localStorage.setItem('theme', theme.value)
+}
+
+function closeApp() {
+  close()
 }
 
 watch(
@@ -37,6 +43,16 @@ watch(
   position: fixed;
   top: 0.5rem;
   right: 0.5rem;
+  background: var(--card-bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+}
+.close-btn {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
   background: var(--card-bg);
   border: none;
   padding: 0.5rem 1rem;
