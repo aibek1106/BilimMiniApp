@@ -33,6 +33,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { fetchRegions, fetchCities, fetchSchools, registerUser } from '../api'
+import { sendData } from '../telegram'
 
 const router = useRouter()
 const language = ref('RU')
@@ -87,6 +88,7 @@ async function proceed() {
     console.log('proceed: registration complete')
     localStorage.setItem('language', language.value)
     localStorage.setItem('registered', '1')
+    sendData('registered')
     router.push('/tests')
   } catch (e) {
     console.error(e)

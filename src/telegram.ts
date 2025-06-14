@@ -1,7 +1,8 @@
-import { init } from '@telegram-apps/sdk-vue'
-
 export function setupTelegram(): void {
-  init()
+  const tg = (window as any)?.Telegram?.WebApp
+  if (!tg) return
+  tg.ready()
+  tg.expand()
 }
 
 export function getInitData(): string {
@@ -18,4 +19,21 @@ export interface TelegramUser {
 
 export function getTelegramUser(): TelegramUser | null {
   return (window as any)?.Telegram?.WebApp?.initDataUnsafe?.user || null
+}
+
+export function close(): void {
+  (window as any)?.Telegram?.WebApp?.close()
+}
+
+export function sendData(data: unknown): void {
+  const str = typeof data === 'string' ? data : JSON.stringify(data)
+  ;(window as any)?.Telegram?.WebApp?.sendData(str)
+}
+
+export function openLink(url: string, tryInWebView = false): void {
+  ;(window as any)?.Telegram?.WebApp?.openLink(url, tryInWebView)
+}
+
+export function openTelegramLink(url: string): void {
+  ;(window as any)?.Telegram?.WebApp?.openTelegramLink(url)
 }
