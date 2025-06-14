@@ -25,7 +25,7 @@ if (isTelegram) {
   console.log('telegram user', user)
   if (user) {
     try {
-      const exists = await userExists(user.id)
+      const exists = userExists(user.id)
       if (exists) {
         localStorage.setItem('registered', '1')
       }
