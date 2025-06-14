@@ -1,25 +1,44 @@
 <template>
   <nav class="bottom-nav">
-    <router-link to="/tests" class="item" :class="{ active: isActive('/tests') }">
+    <div
+      class="item"
+      :class="{ active: isActive('/tests') }"
+      @click="navigate('/tests')"
+    >
       <span class="icon">🏁</span>
       <span class="label">Тесты</span>
-    </router-link>
-    <router-link to="/achievements" class="item" :class="{ active: isActive('/achievements') }">
+    </div>
+    <div
+      class="item"
+      :class="{ active: isActive('/achievements') }"
+      @click="navigate('/achievements')"
+    >
       <span class="icon">🏆</span>
       <span class="label">Достижения</span>
-    </router-link>
-    <router-link to="/profile" class="item" :class="{ active: isActive('/profile') }">
+    </div>
+    <div
+      class="item"
+      :class="{ active: isActive('/profile') }"
+      @click="navigate('/profile')"
+    >
       <span class="icon">👤</span>
       <span class="label">Профиль</span>
-    </router-link>
+    </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+
 const route = useRoute()
+const router = useRouter()
+
 function isActive(path: string) {
   return route.path.startsWith(path)
+}
+
+function navigate(path: string) {
+  router.push(path)
 }
 </script>
 
@@ -42,7 +61,7 @@ function isActive(path: string) {
   align-items: center;
   font-size: 0.9rem;
   color: var(--text-color);
-  text-decoration: none;
+  cursor: pointer;
 }
 .item.active {
   color: var(--accent-color);
