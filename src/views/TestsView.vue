@@ -20,7 +20,7 @@ const subjects = ref<Array<{ id: number; name: string }>>([])
 
 onMounted(async () => {
   try {
-    const res = await apiFetch('/api/subjects')
+    const res = await apiFetch('/api/mobile/subjects')
     if (res.ok) {
       const data = await res.json()
       subjects.value = data
