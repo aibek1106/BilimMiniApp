@@ -31,9 +31,17 @@ if (isTelegram) {
         }
       }
     })
-    .catch(console.error)
-  router.push('/tests').then(r => r)
-  createApp(App).use(router).mount('#app')
+    .then(() => {
+      router.push('/tests').then(r => r)
+      createApp(App).use(router).mount('#app')
+    })
+    .catch(e => {
+      console.error(e)
+      const root = document.getElementById('app')
+      if (root) {
+        root.innerHTML = 'Authentication failed'
+      }
+    })
 } else {
   createApp(OpenTelegram).mount('#app')
 }
