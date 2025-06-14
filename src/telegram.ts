@@ -3,6 +3,9 @@ export function setupTelegram(): void {
   if (!tg) return
   tg.ready()
   tg.expand()
+  applySafeArea(tg)
+  tg.onEvent('safeAreaChanged', () => applySafeArea(tg))
+  tg.onEvent('contentSafeAreaChanged', () => applySafeArea(tg))
   // Set header color based on stored theme and hide the default main button
   try {
     const theme = localStorage.getItem('theme') || 'light'
@@ -53,4 +56,30 @@ export function openLink(url: string, tryInWebView = false): void {
 
 export function openTelegramLink(url: string): void {
   ;(window as any)?.Telegram?.WebApp?.openTelegramLink(url)
+}
+
+function applySafeArea(tg: any) {
+  const root = document.documentElement
+  const inset = tg?.safeAreaInset || {}
+  const content = tg?.contentSafeAreaInset || {}
+  root.style.setProperty('--tg-safe-area-inset-top', `${inset.top || 0}px`)
+  root.style.setProperty('--tg-safe-area-inset-bottom', `${inset.bottom || 0}px`)
+  root.style.setProperty('--tg-safe-area-inset-left', `${inset.left || 0}px`)
+  root.style.setProperty('--tg-safe-area-inset-right', `${inset.right || 0}px`)
+  root.style.setProperty(
+    '--tg-content-safe-area-inset-top',
+    `${content.top || 0}px`
+  )
+  root.style.setProperty(
+    '--tg-content-safe-area-inset-bottom',
+    `${content.bottom || 0}px`
+  )
+  root.style.setProperty(
+    '--tg-content-safe-area-inset-left',
+    `${content.left || 0}px`
+  )
+  root.style.setProperty(
+    '--tg-content-safe-area-inset-right',
+    `${content.right || 0}px`
+  )
 }
