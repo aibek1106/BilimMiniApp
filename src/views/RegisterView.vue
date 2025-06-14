@@ -4,25 +4,30 @@
     <select v-model="language">
       <option value="RU">Русский</option>
       <option value="KY">Кыргызский</option>
-      <option value="EN">English</option>
     </select>
 
     <h2>Область</h2>
     <select v-model.number="regionId">
       <option disabled value="">Выберите область</option>
-      <option v-for="r in regions" :key="r.id" :value="r.id">{{ r.name }}</option>
+      <option v-for="r in regions" :key="r.id" :value="r.id">
+        {{ language === 'KY' ? r.nameKy : r.nameRu }}
+      </option>
     </select>
 
     <h2>Город</h2>
     <select v-model.number="cityId" :disabled="!regionId">
       <option disabled value="">Выберите город</option>
-      <option v-for="c in cities" :key="c.id" :value="c.id">{{ c.name }}</option>
+      <option v-for="c in cities" :key="c.id" :value="c.id">
+        {{ language === 'KY' ? c.nameKy : c.nameRu }}
+      </option>
     </select>
 
     <h2>Школа</h2>
     <select v-model.number="schoolId" :disabled="!cityId">
       <option disabled value="">Выберите школу</option>
-      <option v-for="s in schools" :key="s.id" :value="s.id">{{ s.name }}</option>
+      <option v-for="s in schools" :key="s.id" :value="s.id">
+        {{ language === 'KY' ? s.nameKy : s.nameRu }}
+      </option>
     </select>
 
     <button @click="proceed" :disabled="!schoolId">Продолжить</button>
@@ -38,9 +43,15 @@ import { sendData } from '../telegram'
 const router = useRouter()
 const language = ref('RU')
 
-const regions = ref<Array<{ id: number; name: string }>>([])
-const cities = ref<Array<{ id: number; name: string }>>([])
-const schools = ref<Array<{ id: number; name: string }>>([])
+interface LocItem {
+  id: number
+  nameRu: string
+  nameKy: string
+}
+
+const regions = ref<Array<LocItem>>([])
+const cities = ref<Array<LocItem>>([])
+const schools = ref<Array<LocItem>>([])
 const regionId = ref<number | null>(null)
 const cityId = ref<number | null>(null)
 const schoolId = ref<number | null>(null)
