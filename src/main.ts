@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './style.css'
-import { setupTelegram, getTelegramUser } from './telegram'
+import { setupTelegram, getTelegramUser, getInitData } from './telegram'
 import { authorize, userExists } from './api'
 import { router } from './router'
 import OpenTelegram from './components/OpenTelegram.vue'
@@ -11,11 +11,15 @@ const isTelegram =
   !!(window as any).Telegram?.WebApp &&
   (window as any).Telegram.WebApp.platform !== 'unknown'
 
+console.log('isTelegram', isTelegram)
+
 if (isTelegram) {
   setupTelegram()
+  console.log('initData', getInitData())
   authorize()
     .then(async () => {
       const user = getTelegramUser()
+      console.log('telegram user', user)
       if (user) {
         try {
           const exists = await userExists(user.id)
