@@ -5,6 +5,7 @@
   --background-color: #ffffff;
   --card-bg: #f1f3f5;
   --nav-bg: #ffffff;
+  --nav-bg-translucent: rgba(255, 255, 255, 0.8);
   --border-color: #dee2e6;
 }
 [data-theme='dark'] {
@@ -12,6 +13,7 @@
   --background-color: #121212;
   --card-bg: #1e1e1e;
   --nav-bg: #121212;
+  --nav-bg-translucent: rgba(18, 18, 18, 0.9);
   --border-color: #343a40;
 }
 body {
@@ -22,7 +24,7 @@ body {
   min-height: 100vh;
 }
 .page {
-  padding-bottom: 3.5rem; /* space for nav */
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
 }
 button {
   font-family: var(--font-family);

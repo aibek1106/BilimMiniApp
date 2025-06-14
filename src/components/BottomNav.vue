@@ -45,28 +45,45 @@ function navigate(path: string) {
 <style scoped>
 .bottom-nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  background: var(--nav-bg);
-  border-top: 1px solid var(--border-color);
+  justify-content: space-around;
+  width: calc(100% - 2rem);
+  max-width: 500px;
+  padding: 0.5rem 0.25rem calc(0.5rem + env(safe-area-inset-bottom)) 0.25rem;
+  background: var(--nav-bg-translucent);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .item {
   flex: 1;
   text-align: center;
-  padding: 0.5rem 0;
+  position: relative;
+  padding: 0.25rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--text-color);
   cursor: pointer;
 }
 .item.active {
   color: var(--accent-color);
 }
+.item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  height: 3px;
+  border-radius: 2px 2px 0 0;
+  background: var(--accent-color);
+}
 .icon {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 </style>

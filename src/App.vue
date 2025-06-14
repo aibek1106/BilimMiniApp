@@ -36,7 +36,7 @@ watch(
 .app {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 3.5rem;
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
 }
 .theme-toggle {
   position: fixed;
