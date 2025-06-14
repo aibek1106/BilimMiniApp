@@ -82,6 +82,7 @@ export async function registerUser(payload: Omit<RegisterPayload, 'telegramId' |
     telegramId: user.id,
     firstName: user.first_name,
     lastName: user.last_name,
+    username: user.username,
     ...payload
   }
   console.log('registerUser: payload', body)
