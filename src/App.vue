@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import BottomNav from './components/BottomNav.vue'
-import { close } from './telegram'
+import { close, setHeaderColor } from './telegram'
 
 const theme = ref(localStorage.getItem('theme') || 'light')
 const themeLabel = computed(() =>
@@ -36,6 +36,10 @@ watch(
   theme,
   newTheme => {
     document.documentElement.setAttribute('data-theme', newTheme)
+    const color = getComputedStyle(document.documentElement)
+      .getPropertyValue('--nav-bg')
+      .trim()
+    setHeaderColor(color)
   },
   { immediate: true }
 )
@@ -47,11 +51,12 @@ watch(
   height: 100%;
   box-sizing: border-box;
   padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  padding-top: env(safe-area-inset-top);
   overflow-y: auto;
 }
 .theme-toggle {
   position: fixed;
-  top: 0.5rem;
+  top: calc(env(safe-area-inset-top) + 0.5rem);
   right: 0.5rem;
   background: var(--card-bg);
   border: none;
@@ -61,7 +66,7 @@ watch(
 }
 .close-btn {
   position: fixed;
-  top: 0.5rem;
+  top: calc(env(safe-area-inset-top) + 0.5rem);
   left: 0.5rem;
   background: var(--card-bg);
   border: none;
