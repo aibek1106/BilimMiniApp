@@ -44,8 +44,10 @@ watch(
 <style scoped>
 .app {
   position: relative;
-  min-height: 100vh;
+  height: 100%;
+  box-sizing: border-box;
   padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  overflow-y: auto;
 }
 .theme-toggle {
   position: fixed;

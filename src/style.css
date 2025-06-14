@@ -16,11 +16,16 @@
   --nav-bg-translucent: rgba(18, 18, 18, 0.9);
   --border-color: #343a40;
 }
+html,
+body {
+  height: 100%;
+}
 body {
   margin: 0;
   font-family: var(--font-family);
   color: var(--text-color);
   background: var(--background-color);
+  overflow: hidden;
   min-height: 100vh;
   user-select: none;
   -webkit-user-select: none;
@@ -31,4 +36,8 @@ body {
 }
 button {
   font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent;
+}
+.bottom-nav .item {
+  -webkit-tap-highlight-color: transparent;
 }
