@@ -55,10 +55,4 @@ function select(idx: number) {
   flex-direction: column;
   gap: 0.5rem;
 }
-button {
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-}
 </style>

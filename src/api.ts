@@ -44,26 +44,58 @@ export async function apiFetch(
 
 export async function fetchRegions() {
   console.log('fetchRegions: start')
+  const cached = localStorage.getItem('regions')
+  if (cached) {
+    try {
+      return JSON.parse(cached)
+    } catch (e) {
+      console.error('fetchRegions: cache parse error', e)
+    }
+  }
   const res = await apiFetch('/api/mobile/location/regions')
   console.log('fetchRegions: response status', res.status)
   if (!res.ok) throw new Error('Failed to load regions')
-  return res.json()
+  const data = await res.json()
+  localStorage.setItem('regions', JSON.stringify(data))
+  return data
 }
 
 export async function fetchCities(regionId: number) {
   console.log('fetchCities: region', regionId)
+  const cacheKey = `cities_${regionId}`
+  const cached = localStorage.getItem(cacheKey)
+  if (cached) {
+    try {
+      return JSON.parse(cached)
+    } catch (e) {
+      console.error('fetchCities: cache parse error', e)
+    }
+  }
   const res = await apiFetch(`/api/mobile/location/cities/${regionId}`)
   console.log('fetchCities: response status', res.status)
   if (!res.ok) throw new Error('Failed to load cities')
-  return res.json()
+  const data = await res.json()
+  localStorage.setItem(cacheKey, JSON.stringify(data))
+  return data
 }
 
 export async function fetchSchools(cityId: number) {
   console.log('fetchSchools: city', cityId)
+  const cacheKey = `schools_${cityId}`
+  const cached = localStorage.getItem(cacheKey)
+  if (cached) {
+    try {
+      return JSON.parse(cached)
+    } catch (e) {
+      console.error('fetchSchools: cache parse error', e)
+    }
+  }
   const res = await apiFetch(`/api/mobile/location/schools/${cityId}`)
   console.log('fetchSchools: response status', res.status)
   if (!res.ok) throw new Error('Failed to load schools')
-  return res.json()
+  const data = await res.json()
+  localStorage.setItem(cacheKey, JSON.stringify(data))
+  return data
 }
 
 export interface RegisterPayload {
@@ -92,7 +124,9 @@ export async function registerUser(payload: Omit<RegisterPayload, 'telegramId' |
   })
   console.log('registerUser: response status', res.status)
   if (!res.ok) throw new Error('Registration failed')
-  return res.json()
+  const data = await res.json()
+  localStorage.setItem('userProfile', JSON.stringify(data))
+  return data
 }
 
 export async function userExists(telegramId: number) {

@@ -1,6 +1,10 @@
 <template>
   <div class="page">
-    <h1>Результаты</h1>
+    <img
+      src="https://media.giphy.com/media/3o6UBpHgaXFDNAuttm/giphy.gif"
+      alt="sticker"
+      class="sticker"
+    />
     <p>Ваш результат: {{ score }}</p>
     <button @click="share">Отправить результат</button>
   </div>
@@ -35,5 +39,10 @@ function share() {
 <style scoped>
 .page {
   padding: 1rem;
+}
+.sticker {
+  width: 150px;
+  display: block;
+  margin: 0 auto 1rem;
 }
 </style>

@@ -63,7 +63,7 @@ watch(
   position: fixed;
   top: calc(
     var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, env(safe-area-inset-top))) +
-      0.5rem
+      3rem
   );
   right: 0.5rem;
   background: var(--card-bg);

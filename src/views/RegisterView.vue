@@ -114,18 +114,4 @@ async function proceed() {
   gap: 1rem;
   padding: 1rem;
 }
-select,
-input,
-button {
-  font-size: 1rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  color: var(--text-color);
-}
-button {
-  background: var(--accent-color);
-  color: #fff;
-}
 </style>

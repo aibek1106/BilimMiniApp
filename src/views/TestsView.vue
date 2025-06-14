@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <h1>Тесты</h1>
+    <p class="hint">Выберите предмет, чтобы начать тест</p>
     <div class="tests">
       <div v-for="subject in subjects" :key="subject.id" class="card" @click="open(subject.id)">
         <span class="icon">📚</span>
@@ -19,11 +19,21 @@ const router = useRouter()
 const subjects = ref<Array<{ id: number; name: string }>>([])
 
 onMounted(async () => {
+  const cached = localStorage.getItem('subjects')
+  if (cached) {
+    try {
+      subjects.value = JSON.parse(cached)
+      return
+    } catch (e) {
+      console.error('subjects cache parse error', e)
+    }
+  }
   try {
     const res = await apiFetch('/api/mobile/subjects')
     if (res.ok) {
       const data = await res.json()
       subjects.value = data
+      localStorage.setItem('subjects', JSON.stringify(data))
     }
   } catch (e) {
     console.error(e)
@@ -38,6 +48,9 @@ function open(id: number) {
 <style scoped>
 .page {
   padding: 1rem;
+}
+.hint {
+  margin-bottom: 0.5rem;
 }
 .tests {
   display: flex;
