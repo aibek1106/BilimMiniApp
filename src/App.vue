@@ -1,13 +1,13 @@
 <template>
   <div class="app">
+    <TopNav />
     <router-view />
-    <BottomNav />
   </div>
 </template>
 
 <script setup lang="ts">
 import { watch } from 'vue'
-import BottomNav from './components/BottomNav.vue'
+import TopNav from './components/TopNav.vue'
 import { setHeaderColor } from './telegram'
 import { theme } from './theme'
 
@@ -29,12 +29,15 @@ watch(
   position: relative;
   height: 100%;
   box-sizing: border-box;
-  padding-bottom: calc(
-    5rem + var(--tg-content-safe-area-inset-bottom, var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom)))
+  padding-top: calc(
+    var(
+        --tg-content-safe-area-inset-top,
+        var(--tg-safe-area-inset-top, env(safe-area-inset-top))
+      ) + 5rem
   );
-  padding-top: var(
-    --tg-content-safe-area-inset-top,
-    var(--tg-safe-area-inset-top, env(safe-area-inset-top))
+  padding-bottom: var(
+    --tg-content-safe-area-inset-bottom,
+    var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom))
   );
   overflow-y: auto;
 }
