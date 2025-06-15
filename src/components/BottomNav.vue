@@ -63,6 +63,7 @@ function navigate(path: string) {
   backdrop-filter: blur(16px);
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color var(--transition-duration);
 }
 .item {
   flex: 1;
@@ -75,6 +76,7 @@ function navigate(path: string) {
   font-size: 0.8rem;
   color: var(--text-color);
   cursor: pointer;
+  transition: color var(--transition-duration);
 }
 .item.active {
   color: var(--accent-color);
@@ -87,7 +89,7 @@ function navigate(path: string) {
   right: 25%;
   height: 3px;
   border-radius: 2px 2px 0 0;
-  background: var(--accent-color);
+  background: var(--accent-gradient);
 }
 .icon {
   font-size: 1.4rem;

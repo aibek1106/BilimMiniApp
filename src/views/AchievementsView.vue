@@ -63,6 +63,7 @@ onMounted(() => {
 }
 .progress {
   height: 100%;
-  background: var(--accent-color);
+  background: var(--accent-gradient);
+  transition: width var(--transition-duration);
 }
 </style>
