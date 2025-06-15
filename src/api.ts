@@ -135,5 +135,5 @@ export async function userExists(telegramId: number) {
   console.log('userExists: response status', res.status)
   if (!res.ok) throw new Error('User exists check failed')
   const data = await res.json()
-  return data.exists
+  return data
 }
