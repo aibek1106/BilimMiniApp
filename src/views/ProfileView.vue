@@ -1,14 +1,16 @@
 <template>
   <div class="page">
-    <div class="profile-info">
-      <p>Имя: {{ name }}</p>
-      <p>Язык: {{ language }}</p>
-      <p>Пройдено тестов: {{ testsDone }}</p>
-      <p>Тариф: {{ plan }}</p>
-      <p>Школа: {{ school }}</p>
+    <div class="profile-card card">
+      <div class="profile-info">
+        <p>Имя: {{ name }}</p>
+        <p>Язык: {{ language }}</p>
+        <p>Пройдено тестов: {{ testsDone }}</p>
+        <p>Тариф: {{ plan }}</p>
+        <p>Школа: {{ school }}</p>
+      </div>
+      <button @click="editProfile">Редактировать профиль</button>
+      <button @click="openSettings">Настройки</button>
     </div>
-    <button @click="editProfile">Редактировать профиль</button>
-    <button @click="openSettings">Настройки</button>
   </div>
 </template>
 
@@ -67,10 +69,16 @@ function openSettings() {
   padding: 1rem;
 }
 .profile-info {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 button {
   margin-bottom: 0.5rem;
