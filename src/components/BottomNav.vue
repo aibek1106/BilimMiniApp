@@ -1,5 +1,5 @@
 <template>
-  <nav class="top-nav">
+  <nav class="bottom-nav">
     <div
       class="item"
       :class="{ active: isActive('/tests') }"
@@ -43,13 +43,13 @@ function navigate(path: string) {
 </script>
 
 <style scoped>
-.top-nav {
+.bottom-nav {
   position: fixed;
-  top: calc(
+  bottom: calc(
     var(
-        --tg-content-safe-area-inset-top,
-        var(--tg-safe-area-inset-top, env(safe-area-inset-top))
-      ) + 1.5rem
+        --tg-content-safe-area-inset-bottom,
+        var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom))
+      ) + 3rem
   );
   left: 50%;
   transform: translateX(-50%);
@@ -61,8 +61,8 @@ function navigate(path: string) {
     calc(
         0.5rem +
           var(
-            --tg-content-safe-area-inset-top,
-            var(--tg-safe-area-inset-top, env(safe-area-inset-top))
+            --tg-content-safe-area-inset-bottom,
+            var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom))
           )
       )
       0.25rem 0.5rem 0.25rem;
