@@ -5,7 +5,7 @@
       :class="{ active: isActive('/tests') }"
       @click="navigate('/tests')"
     >
-      <span class="icon">🏁</span>
+      <FlagIcon class="icon" />
       <span class="label">Тесты</span>
     </div>
     <div
@@ -13,7 +13,7 @@
       :class="{ active: isActive('/achievements') }"
       @click="navigate('/achievements')"
     >
-      <span class="icon">🏆</span>
+      <AwardIcon class="icon" />
       <span class="label">Достижения</span>
     </div>
     <div
@@ -21,7 +21,7 @@
       :class="{ active: isActive('/profile') }"
       @click="navigate('/profile')"
     >
-      <span class="icon">👤</span>
+      <UserIcon class="icon" />
       <span class="label">Профиль</span>
     </div>
   </nav>
@@ -29,6 +29,9 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
+import FlagIcon from './icons/FlagIcon.vue'
+import AwardIcon from './icons/AwardIcon.vue'
+import UserIcon from './icons/UserIcon.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -99,6 +102,11 @@ function navigate(path: string) {
   background: var(--accent-gradient);
 }
 .icon {
-  font-size: 1.4rem;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.icon svg {
+  width: 100%;
+  height: 100%;
 }
 </style>

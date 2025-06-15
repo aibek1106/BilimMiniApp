@@ -36,9 +36,12 @@ watch(
         var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom))
       )
   );
-  padding-top: var(
-    --tg-content-safe-area-inset-top,
-    var(--tg-safe-area-inset-top, env(safe-area-inset-top))
+  padding-top: calc(
+    1rem +
+      var(
+        --tg-content-safe-area-inset-top,
+        var(--tg-safe-area-inset-top, env(safe-area-inset-top))
+      )
   );
   overflow-y: auto;
 }
