@@ -5,6 +5,8 @@ import AchievementsView from './views/AchievementsView.vue'
 import ProfileView from './views/ProfileView.vue'
 import TestView from './views/TestView.vue'
 import ResultsView from './views/ResultsView.vue'
+import { userExists } from './api'
+import { getTelegramUser } from './telegram'
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', redirect: '/tests' },
@@ -21,8 +23,22 @@ export const router = createRouter({
   routes
 })
 
-router.beforeEach((to, _from, next) => {
-  const registered = localStorage.getItem('registered') === '1'
+router.beforeEach(async (to, _from, next) => {
+  let registered = localStorage.getItem('registered') === '1'
+  if (!registered) {
+    const user = getTelegramUser()
+    if (user) {
+      try {
+        const exists = await userExists(user.id)
+        if (exists) {
+          localStorage.setItem('registered', '1')
+          registered = true
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
   if (!registered && to.path !== '/register') {
     next('/register')
   } else {
