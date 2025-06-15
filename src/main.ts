@@ -6,6 +6,14 @@ import { authorize, userExists } from './api'
 import { router } from './router'
 import OpenTelegram from './components/OpenTelegram.vue'
 
+function clearCache() {
+  try {
+    localStorage.clear()
+  } catch (e) {
+    console.error('clearCache failed', e)
+  }
+}
+
 async function checkVersion() {
   try {
     const res = await fetch('https://ort-test.com/api/meta/version')
@@ -27,6 +35,8 @@ const isTelegram =
   (window as any).Telegram.WebApp.platform !== 'unknown'
 
 async function init() {
+  clearCache()
+  window.addEventListener('beforeunload', clearCache)
   await checkVersion()
 
   console.log('isTelegram', isTelegram)
