@@ -29,7 +29,7 @@ onMounted(async () => {
     }
   }
   try {
-    const res = await apiFetch('/api/mobile/subjects')
+    const res = await apiFetch('/api/subjects')
     if (res.ok) {
       const data = await res.json()
       subjects.value = data

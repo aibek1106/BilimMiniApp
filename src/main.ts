@@ -8,7 +8,7 @@ import OpenTelegram from './components/OpenTelegram.vue'
 
 async function checkVersion() {
   try {
-    const res = await fetch('https://ort-test.com/api/mobile/meta/version')
+    const res = await fetch('https://ort-test.com/api/meta/version')
     if (!res.ok) return
     const data = await res.json()
     const current = localStorage.getItem('version')

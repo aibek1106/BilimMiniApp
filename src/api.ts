@@ -5,7 +5,7 @@ let token: string | null = localStorage.getItem('jwt')
 export async function authorize(force = false): Promise<string | null> {
   const initData = getInitData()
   console.log('authorize: initData', initData)
-  const res = await fetch('/api/mobile/auth?initData=' + encodeURIComponent(initData), {
+  const res = await fetch('/api/auth?initData=' + encodeURIComponent(initData), {
     method: 'POST'
   })
   console.log('authorize: response status', res.status)
@@ -52,7 +52,7 @@ export async function fetchRegions() {
       console.error('fetchRegions: cache parse error', e)
     }
   }
-  const res = await apiFetch('/api/mobile/location/regions')
+  const res = await apiFetch('/api/location/regions')
   console.log('fetchRegions: response status', res.status)
   if (!res.ok) throw new Error('Failed to load regions')
   const data = await res.json()
@@ -71,7 +71,7 @@ export async function fetchCities(regionId: number) {
       console.error('fetchCities: cache parse error', e)
     }
   }
-  const res = await apiFetch(`/api/mobile/location/cities/${regionId}`)
+  const res = await apiFetch(`/api/location/cities/${regionId}`)
   console.log('fetchCities: response status', res.status)
   if (!res.ok) throw new Error('Failed to load cities')
   const data = await res.json()
@@ -90,7 +90,7 @@ export async function fetchSchools(cityId: number) {
       console.error('fetchSchools: cache parse error', e)
     }
   }
-  const res = await apiFetch(`/api/mobile/location/schools/${cityId}`)
+  const res = await apiFetch(`/api/location/schools/${cityId}`)
   console.log('fetchSchools: response status', res.status)
   if (!res.ok) throw new Error('Failed to load schools')
   const data = await res.json()
@@ -117,7 +117,7 @@ export async function registerUser(payload: Omit<RegisterPayload, 'telegramId' |
     ...payload
   }
   console.log('registerUser: payload', body)
-  const res = await apiFetch('/api/mobile/users/register', {
+  const res = await apiFetch('/api/users/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
@@ -131,7 +131,7 @@ export async function registerUser(payload: Omit<RegisterPayload, 'telegramId' |
 
 export async function userExists(telegramId: number) {
   console.log('userExists: telegramId', telegramId)
-  const res = await apiFetch(`/api/mobile/users/${telegramId}/exists`)
+  const res = await apiFetch(`/api/users/${telegramId}/exists`)
   console.log('userExists: response status', res.status)
   if (!res.ok) throw new Error('User exists check failed')
   const data = await res.json()

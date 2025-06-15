@@ -70,7 +70,7 @@ onMounted(async () => {
     }
   }
   try {
-    const res = await apiFetch(`/api/mobile/users/${user.id}`)
+    const res = await apiFetch(`/api/users/${user.id}`)
     if (res.ok) {
       const data = await res.json()
       name.value = `${data.firstName} ${data.lastName}`
