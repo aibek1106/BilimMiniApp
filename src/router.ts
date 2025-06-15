@@ -3,7 +3,6 @@ import RegisterView from './views/RegisterView.vue'
 import TestsView from './views/TestsView.vue'
 import AchievementsView from './views/AchievementsView.vue'
 import ProfileView from './views/ProfileView.vue'
-import SettingsView from './views/SettingsView.vue'
 import TestView from './views/TestView.vue'
 import ResultsView from './views/ResultsView.vue'
 
@@ -13,7 +12,6 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/tests', component: TestsView },
   { path: '/achievements', component: AchievementsView },
   { path: '/profile', component: ProfileView },
-  { path: '/profile/settings', component: SettingsView },
   { path: '/test/:id', component: TestView },
   { path: '/results/:id', component: ResultsView }
 ]
